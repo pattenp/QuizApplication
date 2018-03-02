@@ -1,4 +1,4 @@
 package repository;
 
-public abstract class BaseRepository {
+public abstract class BaseRepository<T> {
 }

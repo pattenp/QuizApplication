@@ -32,9 +32,9 @@ public interface GameApiService {
   /**
    * Returns a list with all the categories in the api.
    *
-   * @return All categorys that are available from the api.
+   * @return All categories that are available from the api.
    */
-  List<Category> requestCategorys();
+  List<Category> requestCategories();
 
 
   /**
