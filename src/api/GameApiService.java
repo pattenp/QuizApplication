@@ -1,7 +1,7 @@
 package api;
 
 import java.util.List;
-import java.util.Locale.Category;
+import model.Category;
 import model.Player;
 import model.Question;
 
