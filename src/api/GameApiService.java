@@ -1,9 +1,6 @@
 package api;
 
-import java.util.List;
 import model.Category;
-import model.Player;
-import model.Question;
 
 /**
  * Methods for communicating with the Api. The user should be authenticated to do all of the requests except for the
@@ -20,21 +17,23 @@ public interface GameApiService {
    * @param category A reference to a category.
    * @return A List of questions.
    */
-  List<Question> requestGame(Category category, int nbrOfQuestions);
+  QuestionResponse requestGame(Category category, int nbrOfQuestions) throws Exception;
+
+  QuestionResponse requestGame(Category category) throws Exception;
 
   /**
    * Returns a list of players with the highest score.
    *
    * @return A List with most 10 players that have the highest score.
    */
-  List<Player> requestHighScore();
+  HighscoreResponse requestHighScore();
 
   /**
    * Returns a list with all the categories in the api.
    *
    * @return All categories that are available from the api.
    */
-  List<Category> requestCategories();
+  RequestResponse requestCategories();
 
 
   /**
@@ -43,5 +42,5 @@ public interface GameApiService {
    * @param score    The score of the player.
    * @param category The category the score was acquired in.
    */
-  void postScore(int score, Category category);
+  RequestResponse postScore(int score, Category category);
 }

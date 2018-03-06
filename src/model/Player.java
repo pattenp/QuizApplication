@@ -4,12 +4,12 @@ package model;
  * A Player has a id, name and score.
  * @author Patrik Larsson.
  */
-public class Player {
+public class Player implements Comparable<Player> {
   private final long id;
   private final String name;
-  private final long score;
+  private final int score;
 
-  public Player(long id, String name, long score) {
+  public Player(long id, String name, int score) {
     this.id = id;
     this.name = name;
     this.score = score;
@@ -23,7 +23,13 @@ public class Player {
     return name;
   }
 
-  public long getScore() {
+  public int getScore() {
     return score;
+  }
+
+
+  @Override
+  public int compareTo(Player player) {
+    return score - player.score;
   }
 }
