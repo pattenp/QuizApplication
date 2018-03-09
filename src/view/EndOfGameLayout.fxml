@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EndOfGameController">
+   <children>
+      <Label fx:id="lblScore" layoutX="194.0" layoutY="41.0" prefHeight="28.0" prefWidth="198.0" text="Your final score is __ points">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="240.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleMainMenu" prefHeight="25.0" prefWidth="105.0" text="Main Menu" />
+      <Button layoutX="240.0" layoutY="155.0" mnemonicParsing="false" onAction="#handleSendHighScore" prefHeight="25.0" prefWidth="105.0" text="Send high score" />
+   </children>
+</AnchorPane>
