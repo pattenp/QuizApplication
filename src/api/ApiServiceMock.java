@@ -27,7 +27,7 @@ public class ApiServiceMock {
   //private boolean shouldGive404Error = false;
 
   public ApiServiceMock() {
-
+    init();
   }
 
   public List<Category> getAllCategories() {
