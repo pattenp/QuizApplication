@@ -16,10 +16,10 @@ public class ApiServiceMock {
   private long currentHighscoreID = 0;
   private long currentQuestionID  = 0;
 
-  private HashMap<Category, List<Question>> questionMap  = new HashMap<>();
-  private HashMap<Long, Category>           categoryMap  = new HashMap<>();
-  private HashMap<Long, Answer>             answerMap    = new HashMap<>();
-  private HashMap<Long, HighScore>          highscoreMap = new HashMap<>();
+  private HashMap<Category, List<Question>>  questionMap  = new HashMap<>();
+  private HashMap<Long, Category>            categoryMap  = new HashMap<>();
+  private HashMap<Long, Answer>              answerMap    = new HashMap<>();
+  private HashMap<Category, List<HighScore>> highscoreMap = new HashMap<>();
 
   private boolean shouldGive404Error = false;
   private boolean shouldGive409Error = false;
@@ -34,7 +34,7 @@ public class ApiServiceMock {
     List<Category> categories = new ArrayList<>();
     throwIfSet();
     Set<Long> keys = categoryMap.keySet();
-    for (Long key: keys) {
+    for (Long key : keys) {
       Category category = categoryMap.get(key);
       categories.add(category);
     }
@@ -43,10 +43,10 @@ public class ApiServiceMock {
 
   public List<Question> getQuestionByCategoryName(String name, int limit) {
     throwIfSet();
-    boolean categoryFound = false;
-    Category categoryToUse = null;
-    List<Category> categories = getAllCategories();
-    for (Category c: categories) {
+    boolean        categoryFound = false;
+    Category       categoryToUse = null;
+    List<Category> categories    = getAllCategories();
+    for (Category c : categories) {
       if (c.getName().equals(name)) {
         categoryFound = true;
         categoryToUse = c;
@@ -83,10 +83,10 @@ public class ApiServiceMock {
 
   public AnswerWrapper getAnswerByQuestionId(Long questionId) throws Exception {
     throwIfSet();
-    Set<Category> keys =  questionMap.keySet();
-    boolean questionFound = false;
-    Question question = null;
-    for (Category key: keys) {
+    Set<Category> keys          = questionMap.keySet();
+    boolean       questionFound = false;
+    Question      question      = null;
+    for (Category key : keys) {
       List<Question> questionsInCategory = questionMap.get(key);
       for (int i = 0; i < questionsInCategory.size(); i++) {
         if (questionsInCategory.get(i).getId() == questionId) {
@@ -95,9 +95,9 @@ public class ApiServiceMock {
       }
     }
     if (questionFound) {
-      List<Answer> candidateAnswers = question.getCandiateAnswers();
-      List<Long> candidateAnswersId = new ArrayList<>();
-      int correctAnswer = -1;
+      List<Answer> candidateAnswers   = question.getCandiateAnswers();
+      List<Long>   candidateAnswersId = new ArrayList<>();
+      int          correctAnswer      = -1;
       for (int i = 0; i < candidateAnswers.size(); i++) {
         candidateAnswersId.add(candidateAnswers.get(i).getId());
         if (candidateAnswers.get(i).getId() == question.getCorrectAnswer().getId()) {
@@ -108,6 +108,18 @@ public class ApiServiceMock {
       return wrapper;
     }
     throw new Exception("404 question not found"); // TODO changed to custom exceptiom
+  }
+
+  public List<HighScore> getHighscoreByCategoryName(String categoryName) throws Exception {
+    List<Category> categories    = getAllCategories();
+    boolean        categoryFound = false;
+    for (Category c : categories) {
+      if (c.getName().equals(categoryName)) {
+        categoryFound = true;
+        return highscoreMap.get(c);
+      }
+    }
+    throw new Exception("404 category not found"); // TODO Switch to custom businessexception.
   }
 
   private void throwIfSet() {
@@ -126,38 +138,88 @@ public class ApiServiceMock {
     createCategory("Subtraction");
 
     // Create 15 Addition questions
-    createQuestion("Vad är 1 + 1", categoryMap.get(0));
-    createQuestion("Vad är 1 + 2", categoryMap.get(0));
-    createQuestion("Vad är 1 + 3", categoryMap.get(0));
-    createQuestion("Vad är 1 + 4", categoryMap.get(0));
-    createQuestion("Vad är 1 + 5", categoryMap.get(0));
-    createQuestion("Vad är 1 + 6", categoryMap.get(0));
-    createQuestion("Vad är 1 + 7", categoryMap.get(0));
-    createQuestion("Vad är 1 + 8", categoryMap.get(0));
-    createQuestion("Vad är 1 + 9", categoryMap.get(0));
-    createQuestion("Vad är 1 + 10", categoryMap.get(0));
-    createQuestion("Vad är 1 + 11", categoryMap.get(0));
-    createQuestion("Vad är 1 + 12", categoryMap.get(0));
-    createQuestion("Vad är 1 + 13", categoryMap.get(0));
-    createQuestion("Vad är 1 + 14", categoryMap.get(0));
-    createQuestion("Vad är 1 + 15", categoryMap.get(0));
+    Question question;
+    question = createQuestion("Vad är 1 + 1", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 2L);
+    question = createQuestion("Vad är 1 + 2", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 3L);
+    question = createQuestion("Vad är 1 + 3", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 4L);
+    question = createQuestion("Vad är 1 + 4", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 5L);
+    question = createQuestion("Vad är 1 + 5", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 6L);
+    question = createQuestion("Vad är 1 + 6", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 7L);
+    question = createQuestion("Vad är 1 + 7", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 8L);
+    question = createQuestion("Vad är 1 + 8", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 9L);
+    question = createQuestion("Vad är 1 + 9", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 10L);
+    question = createQuestion("Vad är 1 + 10", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 11L);
+    question = createQuestion("Vad är 1 + 11", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 12L);
+    question = createQuestion("Vad är 1 + 12", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 13L);
+    question = createQuestion("Vad är 1 + 13", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 14L);
+    question = createQuestion("Vad är 1 + 14", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 15L);
+    question = createQuestion("Vad är 1 + 15", categoryMap.get(0));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 16L);
 
     // Create 15 Subtraction QUestions
-    createQuestion("Vad är 15 - 1", categoryMap.get(1));
-    createQuestion("Vad är 14 - 1", categoryMap.get(1));
-    createQuestion("Vad är 13 - 1", categoryMap.get(1));
-    createQuestion("Vad är 12 - 1", categoryMap.get(1));
-    createQuestion("Vad är 11 - 1", categoryMap.get(1));
-    createQuestion("Vad är 10 - 1", categoryMap.get(1));
-    createQuestion("Vad är 9 - 1", categoryMap.get(1));
-    createQuestion("Vad är 8 - 1", categoryMap.get(1));
-    createQuestion("Vad är 7 - 1", categoryMap.get(1));
-    createQuestion("Vad är 6 - 1", categoryMap.get(1));
-    createQuestion("Vad är 5 - 1", categoryMap.get(1));
-    createQuestion("Vad är 4 - 1", categoryMap.get(1));
-    createQuestion("Vad är 3 - 1", categoryMap.get(1));
-    createQuestion("Vad är 2 - 1", categoryMap.get(1));
-    createQuestion("Vad är 1 - 1", categoryMap.get(1));
+    question = createQuestion("Vad är 15 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 14L);
+    question = createQuestion("Vad är 14 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 13L);
+    question = createQuestion("Vad är 13 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 12L);
+    question = createQuestion("Vad är 12 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 11L);
+    question = createQuestion("Vad är 11 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 10L);
+    question = createQuestion("Vad är 10 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 9L);
+    question = createQuestion("Vad är 9 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 8L);
+    question = createQuestion("Vad är 8 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 7L);
+    question = createQuestion("Vad är 7 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 6L);
+    question = createQuestion("Vad är 6 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 5L);
+    question = createQuestion("Vad är 5 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 4L);
+    question = createQuestion("Vad är 4 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 3L);
+    question = createQuestion("Vad är 3 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 2L);
+    question = createQuestion("Vad är 2 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 1L);
+    question = createQuestion("Vad är 1 - 1", categoryMap.get(1));
+    setCandidateAnswersIdAndCorrectAnswerId(question, 0L);
+
+    // Create Highscore
+    createHighScore("Patrik", categoryMap.get(0L), 3);
+    createHighScore("Nico", categoryMap.get(0L), 5);
+    createHighScore("Dainel", categoryMap.get(1L), 4);
+  }
+
+  private void setCandidateAnswersIdAndCorrectAnswerId(Question question, Long correctAnswerId) {
+    List<Answer> candidateAnswers = new ArrayList<>(4);
+    Answer       candidate1       = answerMap.get(99L);
+    Answer       candidate2       = answerMap.get(98L);
+    Answer       candidate3       = answerMap.get(97L);
+    Answer       correctCandaiate = answerMap.get(correctAnswerId);
+    candidateAnswers.add(candidate1);
+    candidateAnswers.add(candidate2);
+    candidateAnswers.add(candidate3);
+    candidateAnswers.add(correctCandaiate);
+    question.setCandiateAnswers(candidateAnswers);
+
   }
 
   private void createCategory(String name) {
@@ -167,13 +229,15 @@ public class ApiServiceMock {
     categoryMap.put(category.getId(), category);
     ArrayList<Question> arrayList = new ArrayList<>();
     questionMap.put(category, arrayList);
+    highscoreMap.put(category, new ArrayList<HighScore>());
   }
 
-  private void createQuestion(String content, Category category) {
+  private Question createQuestion(String content, Category category) {
     Question question = new Question();
     question.setId(currentQuestionID++);
     question.setContent(content);
     addQuestion(question, category.getId());
+    return question;
   }
 
   private void addQuestion(Question question, long categoryId) {
@@ -193,7 +257,10 @@ public class ApiServiceMock {
     highscore.setId(currentHighscoreID++);
     highscore.setScore(score);
     highscore.setName(name);
+    addHighScore(highscore, category);
   }
 
-
+  private void addHighScore(HighScore score, Category category) {
+    highscoreMap.get(category).add(score);
+  }
 }
