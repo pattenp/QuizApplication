@@ -1,45 +1,17 @@
 package api;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.concurrent.CompletableFuture;
+import java.util.List;
 import model.Category;
+import model.HighScore;
+import model.Question;
 
-public class ApiService {
+public interface ApiService {
 
-	public String getCategory() throws IOException {
-		URL url = new URL("http://localhost:8080/api/1/category/");
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		connection.setRequestMethod("GET");
+  List<Category> getAllCategories();
 
-		int respCode = connection.getResponseCode();
-		if (respCode == HttpURLConnection.HTTP_OK) {
-			BufferedReader buffReader = new BufferedReader(
-					new InputStreamReader(
-							connection.getInputStream())
-			);
-			String inputLine;
-			StringBuffer response = new StringBuffer();
+  List<Question> getQuestionByCategoryName(String name, int limit);
 
-			while((inputLine = buffReader.readLine()) != null) {
-				response.append(inputLine);
-			}
+  AnswerWrapper getAnswerByQuestionId(Long questionId) throws Exception;
 
-			System.out.println(response.toString());
-		}
-		return null;
-	}
-
-
-	public static void main(String[] args) {
-		ApiService api = new ApiService();
-		try {
-			api.getCategory();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+  List<HighScore> getHighscoreByCategoryName(String categoryName) throws Exception;
 }

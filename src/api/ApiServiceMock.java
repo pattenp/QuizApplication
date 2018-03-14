@@ -9,7 +9,7 @@ import model.Category;
 import model.HighScore;
 import model.Question;
 
-public class ApiServiceMock {
+public class ApiServiceMock implements ApiService {
 
   private long current_answerID   = 0;
   private long currentCategoryID  = 0;
@@ -30,6 +30,7 @@ public class ApiServiceMock {
     init();
   }
 
+  @Override
   public List<Category> getAllCategories() {
     List<Category> categories = new ArrayList<>();
     throwIfSet();
@@ -41,6 +42,7 @@ public class ApiServiceMock {
     return categories;
   }
 
+  @Override
   public List<Question> getQuestionByCategoryName(String name, int limit) {
     throwIfSet();
     boolean        categoryFound = false;
@@ -81,6 +83,7 @@ public class ApiServiceMock {
     throw new IllegalArgumentException("Limit should not be larger than 30");
   }
 
+  @Override
   public AnswerWrapper getAnswerByQuestionId(Long questionId) throws Exception {
     throwIfSet();
     Set<Category> keys          = questionMap.keySet();
@@ -110,6 +113,7 @@ public class ApiServiceMock {
     throw new Exception("404 question not found"); // TODO changed to custom exceptiom
   }
 
+  @Override
   public List<HighScore> getHighscoreByCategoryName(String categoryName) throws Exception {
     List<Category> categories    = getAllCategories();
     boolean        categoryFound = false;
