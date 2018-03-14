@@ -1,29 +1,54 @@
 package model;
 
-/**
- * A answer has textContent, an id, and isAnswerTo a question.
- * @author Patrik Larsson
- */
-public class Answer {
-  private final String textContent;
-  private final long id;
-  private final long isAnswerTo;
+import java.io.Serializable;
+import java.util.Date;
 
-  public Answer(String textContent, long id, long isAnswerTo) {
-    this.textContent = textContent;
-    this.id = id;
-    this.isAnswerTo = isAnswerTo;
+public class Answer implements Serializable {
+
+  private Long id;
+
+  private String content;
+
+  private Date createdAt;
+
+  private Date updatedAt;
+
+  public Answer() {
   }
 
-  public String getTextContent() {
-    return textContent;
+  public Answer(Long id) {
+    this.id = new Long(id);
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public long getIsAnswerTo() {
-    return isAnswerTo;
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  public Date getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public Date getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(Date updatedAt) {
+    this.updatedAt = updatedAt;
   }
 }

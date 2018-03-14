@@ -1,0 +1,7 @@
+{
+  "Content": "Vad är 4 + 4",
+  "Id": 1,
+  "Last": true,
+  "CandidateAnswer": [1, 2,3,4],
+  "RealAnswer": [1]
+}

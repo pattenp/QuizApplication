@@ -1,8 +1,6 @@
 package logic;
 
 
-import java.util.ArrayList;
-import model.Category;
 import repository.PlayerRepository;
 import repository.QuestionRepository;
 import view.View;
