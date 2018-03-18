@@ -2,6 +2,7 @@ package api;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.List;
 import model.Category;
 import model.HighScore;
@@ -11,7 +12,8 @@ public interface ApiService {
 
   List<Category> getAllCategories() throws IOException;
 
-  List<Question> getQuestionByCategoryName(String name, int limit);
+  List<Question> getQuestionsByCategoryName(String name, int limit)
+      throws IOException, URISyntaxException;
 
   AnswerWrapper getAnswerByQuestionId(Long questionId) throws Exception;
 

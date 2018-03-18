@@ -1,17 +1,18 @@
 package api;
 
 import java.util.List;
+import model.Answer;
 
 public class AnswerWrapper {
-  List<Long> candidateAnswersId;
+  List<Answer> candidateAnswersId;
   int        correctAnswerIndex;
 
-  public AnswerWrapper(List<Long> candidateAnswersId, int correctAnswerIndex) {
+  public AnswerWrapper(List<Answer> candidateAnswersId, int correctAnswerIndex) {
     this.candidateAnswersId = candidateAnswersId;
     this.correctAnswerIndex = correctAnswerIndex;
   }
 
-  public void setCandidateAnswersId(List<Long> candidateAnswersId) {
+  public void setCandidateAnswersId(List<Answer> candidateAnswersId) {
     this.candidateAnswersId = candidateAnswersId;
   }
 

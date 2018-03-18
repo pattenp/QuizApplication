@@ -43,7 +43,7 @@ public class ApiServiceMock implements ApiService {
   }
 
   @Override
-  public List<Question> getQuestionByCategoryName(String name, int limit) {
+  public List<Question> getQuestionsByCategoryName(String name, int limit) {
     throwIfSet();
     boolean        categoryFound = false;
     Category       categoryToUse = null;
@@ -98,7 +98,7 @@ public class ApiServiceMock implements ApiService {
       }
     }
     if (questionFound) {
-      List<Answer> candidateAnswers   = question.getCandiateAnswers();
+      List<Answer> candidateAnswers   = question.getCandidateAnswers();
       List<Long>   candidateAnswersId = new ArrayList<>();
       int          correctAnswer      = -1;
       for (int i = 0; i < candidateAnswers.size(); i++) {
@@ -107,7 +107,7 @@ public class ApiServiceMock implements ApiService {
           correctAnswer = i;
         }
       }
-      AnswerWrapper wrapper = new AnswerWrapper(candidateAnswersId, correctAnswer);
+      AnswerWrapper wrapper = new AnswerWrapper(candidateAnswers, correctAnswer);
       return wrapper;
     }
     throw new Exception("404 question not found"); // TODO changed to custom exceptiom
@@ -222,7 +222,7 @@ public class ApiServiceMock implements ApiService {
     candidateAnswers.add(candidate2);
     candidateAnswers.add(candidate3);
     candidateAnswers.add(correctCandaiate);
-    question.setCandiateAnswers(candidateAnswers);
+    question.setCandidateAnswers(candidateAnswers);
 
   }
 
