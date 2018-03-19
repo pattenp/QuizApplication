@@ -16,7 +16,7 @@ public class Question implements Serializable {
 
   private Answer correctAnswer;
 
-  private List<Answer> candiateAnswers;
+  private List<Answer> candidateAnswers;
 
   private List<Category> categories;
 
@@ -48,12 +48,12 @@ public class Question implements Serializable {
     this.correctAnswer = correctAnswer;
   }
 
-  public List<Answer> getCandiateAnswers() {
-    return candiateAnswers;
+  public List<Answer> getCandidateAnswers() {
+    return candidateAnswers;
   }
 
-  public void setCandiateAnswers(List<Answer> candiateAnswers) {
-    this.candiateAnswers = candiateAnswers;
+  public void setCandidateAnswers(List<Answer> candidateAnswers) {
+    this.candidateAnswers = candidateAnswers;
   }
 
   public List<Category> getCategories() {
