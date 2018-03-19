@@ -3,6 +3,10 @@ package api;
 import java.util.List;
 import model.Answer;
 
+/**
+ * This class is used to wrap A List of answers and the correct answer index.
+ * @author Patrik
+ */
 public class AnswerWrapper {
   List<Answer> candidateAnswersId;
   int        correctAnswerIndex;

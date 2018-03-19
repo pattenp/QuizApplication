@@ -95,7 +95,7 @@ public class ApiServiceMock {
       }
     }
     if (questionFound) {
-      List<Answer> candidateAnswers   = question.getCandiateAnswers();
+      List<Answer> candidateAnswers   = question.getCandidateAnswers();
       List<Long>   candidateAnswersId = new ArrayList<>();
       int          correctAnswer      = -1;
       for (int i = 0; i < candidateAnswers.size(); i++) {
@@ -104,7 +104,7 @@ public class ApiServiceMock {
           correctAnswer = i;
         }
       }
-      AnswerWrapper wrapper = new AnswerWrapper(candidateAnswersId, correctAnswer);
+      AnswerWrapper wrapper = new AnswerWrapper(candidateAnswers, correctAnswer);
       return wrapper;
     }
     throw new Exception("404 question not found"); // TODO changed to custom exceptiom
@@ -218,7 +218,7 @@ public class ApiServiceMock {
     candidateAnswers.add(candidate2);
     candidateAnswers.add(candidate3);
     candidateAnswers.add(correctCandidate);
-    question.setCandiateAnswers(candidateAnswers);
+    question.setCandidateAnswers(candidateAnswers);
     question.setCorrectAnswer(correctCandidate);
   }
 

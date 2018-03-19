@@ -74,7 +74,7 @@ public class GameController implements Initializable {
             Question newQuestion = questionList.get(currentQuestion - 1);
             lblCurQuestion.setText("Current Question: " + currentQuestion + "/" + amountOfQuestions);
             textArea.setText(newQuestion.getContent());
-            candidateAnswers = newQuestion.getCandiateAnswers();
+            candidateAnswers = newQuestion.getCandidateAnswers();
             setAlternatives(candidateAnswers.get(0).getContent(), candidateAnswers.get(1).getContent(),
                     candidateAnswers.get(2).getContent(), candidateAnswers.get(3).getContent());
             setCorrectAlternative(newQuestion.getCorrectAnswer().getContent());
@@ -110,7 +110,7 @@ public class GameController implements Initializable {
     public void setInitialAlternatives() {
         Question question = questionList.get(currentQuestion - 1);
 
-        candidateAnswers = question.getCandiateAnswers();
+        candidateAnswers = question.getCandidateAnswers();
         setAlternatives(candidateAnswers.get(0).getContent(), candidateAnswers.get(1).getContent(),
                 candidateAnswers.get(2).getContent(), candidateAnswers.get(3).getContent());
         setCorrectAlternative(question.getCorrectAnswer().getContent());

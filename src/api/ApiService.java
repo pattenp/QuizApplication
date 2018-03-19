@@ -8,6 +8,10 @@ import model.Category;
 import model.HighScore;
 import model.Question;
 
+/**
+ * This interface contains the methods that should be used to communicate with the api service.
+ * @Author Patrik Larsson
+ */
 public interface ApiService {
 
   List<Category> getAllCategories() throws IOException;
